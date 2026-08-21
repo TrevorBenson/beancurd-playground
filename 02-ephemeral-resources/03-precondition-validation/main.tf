@@ -12,7 +12,7 @@ provider "restful" {
   base_url = "https://jsonplaceholder.typicode.com"
 }
 
-# Extends 05-restful-ephemeral-resource/valid-response: same fixed endpoint
+# Extends 01-valid-response: same fixed endpoint
 # and ephemeral resource, plus a variable that must match a value found in
 # the *actual* ephemeral response, enforced by a lifecycle precondition.
 

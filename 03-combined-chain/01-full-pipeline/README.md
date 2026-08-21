@@ -1,4 +1,4 @@
-# Full pipeline: chaining every concept in this repo
+# Full pipeline: chaining six concepts from the earlier tiers
 
 A single capstone example wiring together every concept demonstrated
 individually in the earlier tiers, around one shared `var.todo_id`:
@@ -39,6 +39,9 @@ terraform plan
 Expect a clean plan, no warnings or errors:
 
 ```
+ephemeral.restful_resource.todo: Opening...
+ephemeral.restful_resource.todo: Open complete after 0s
+
 Changes to Outputs:
   + todo_title = "delectus aut autem"
 ```

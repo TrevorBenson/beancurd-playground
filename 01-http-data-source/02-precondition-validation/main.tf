@@ -8,7 +8,7 @@ terraform {
   }
 }
 
-# Extends 04-data-http-json-key: same fixed-response endpoint, but adds a
+# Extends 01-fetch-and-decode-json: same fixed-response endpoint, but adds a
 # variable that must match a value found in the *actual* HTTP response.
 # A lifecycle precondition on the data source enforces that, using `self`
 # to refer back to the data source's own attributes.

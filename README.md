@@ -35,7 +35,7 @@ tiers build on earlier tiers.
 | Directory | Concept |
 |-----------|---------|
 | [`01-fetch-and-decode-json`](01-http-data-source/01-fetch-and-decode-json) | `data "http"` fetching a known/fixed JSON response and accessing a key with `jsondecode()` |
-| [`02-precondition-validation`](01-http-data-source/02-precondition-validation) | Extends #1: variable validation against the live HTTP response via a precondition, invalidating the plan |
+| [`02-precondition-validation`](01-http-data-source/02-precondition-validation) | Extends `01-fetch-and-decode-json`: variable validation against the live HTTP response via a precondition, invalidating the plan |
 | [`03-for-each-multiple-requests`](01-http-data-source/03-for-each-multiple-requests) | `for_each` over `data "http"` to fetch several known endpoints in one plan |
 
 ### Tier 2 - [`02-ephemeral-resources`](02-ephemeral-resources) (requires network access, Terraform/OpenTofu >= 1.10)
@@ -44,7 +44,7 @@ tiers build on earlier tiers.
 |-----------|---------|
 | [`01-valid-response`](02-ephemeral-resources/01-valid-response) | `magodo/restful` `ephemeral "restful_resource"` - valid response + key access |
 | [`02-invalid-response`](02-ephemeral-resources/02-invalid-response) | Same provider against a `401`/`404` response, showing a hard plan-time error |
-| [`03-precondition-validation`](02-ephemeral-resources/03-precondition-validation) | Extends #1: variable validation against the ephemeral response via a precondition, invalidating the plan |
+| [`03-precondition-validation`](02-ephemeral-resources/03-precondition-validation) | Extends `01-valid-response`: variable validation against the ephemeral response via a precondition, invalidating the plan |
 
 ### Tier 3 - [`03-combined-chain`](03-combined-chain) (requires network access, Terraform/OpenTofu >= 1.10)
 

@@ -14,7 +14,7 @@ provider "restful" {
 
 # jsonplaceholder.typicode.com/todos/1 always returns the same fixed body:
 #   {"userId": 1, "id": 1, "title": "delectus aut autem", "completed": false}
-# (same endpoint used via `data "http"` in 04-data-http-json-key.)
+# (same endpoint used via `data "http"` in 01-http-data-source/01-fetch-and-decode-json.)
 module "todo" {
   source = "./modules/todo-fetcher"
   path   = "/todos/1"

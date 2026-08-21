@@ -51,4 +51,3 @@ Try adding or removing an entry from `var.widgets` (e.g. via a
 only the changed keys show as added/destroyed; unrelated keys are
 untouched. This is the core benefit of `for_each` over `count`: reordering
 or removing one entry doesn't churn every other instance.
-```
