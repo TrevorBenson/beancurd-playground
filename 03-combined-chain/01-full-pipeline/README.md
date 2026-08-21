@@ -1,6 +1,6 @@
 # Full pipeline: chaining six concepts from the earlier tiers
 
-A single capstone example wiring together every concept demonstrated
+A single capstone example wiring together six concepts demonstrated
 individually in the earlier tiers, around one shared `var.todo_id`:
 
 1. **Variable validation** ([`00-fundamentals/04-variable-validation`](../../00-fundamentals/04-variable-validation)) -
