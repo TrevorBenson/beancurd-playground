@@ -1,0 +1,11 @@
+# Terraform/OpenTofu working files
+# (.terraform.lock.hcl is intentionally committed for reproducibility)
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+
+# Scratch/testing directory (not part of committed examples)
+.tmp/
