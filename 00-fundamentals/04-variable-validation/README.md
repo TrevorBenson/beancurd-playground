@@ -32,7 +32,7 @@ Error: Invalid value for variable
 ...
 environment must be one of: dev, staging, production.
 
-This was checked by the validation rule at main.tf:6,3-13.
+This was checked by the validation rule at main.tf:14,3-13.
 ```
 
 Now supply a valid value:
