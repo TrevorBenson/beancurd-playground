@@ -2,7 +2,7 @@
 
 Demonstrates a `lifecycle { precondition {} }` block that compares two
 `local` values and hard-fails the plan when they disagree. Contrast with
-[`01-plan-check-warning`](../01-plan-check-warning), where a failed assertion
+[`01-check-block-warning`](../01-check-block-warning), where a failed assertion
 only warns - a failed `precondition` stops the plan/apply entirely.
 
 Uses the built-in `terraform_data` resource (part of the implicit

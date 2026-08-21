@@ -1,6 +1,6 @@
 # Variable validation against a `data "http"` response via a lifecycle precondition
 
-Extends [`04-data-http-json-key`](../04-data-http-json-key): fetches the same
+Extends [`01-fetch-and-decode-json`](../01-fetch-and-decode-json): fetches the same
 fixed JSON body, then uses a `lifecycle { precondition {} }` to validate a
 variable against a value found in the *actual* response, invalidating the
 plan when it doesn't match.
