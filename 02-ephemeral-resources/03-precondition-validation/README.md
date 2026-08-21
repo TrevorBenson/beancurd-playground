@@ -19,7 +19,7 @@ Two of the constraints from the earlier examples combine here:
   [`modules/todo-fetcher`](modules/todo-fetcher).
 - `self` (used to reference a block's own result) only works in
   `postcondition`, not `precondition` (see
-  [`../01-http-data-source/02-precondition-validation`](../../01-http-data-source/02-precondition-validation)),
+  [`01-http-data-source/02-precondition-validation`](../../01-http-data-source/02-precondition-validation)),
   so the precondition is attached to the module's `output "title"` block,
   referencing `ephemeral.restful_resource.item.output.completed` directly
   rather than via `self`.
