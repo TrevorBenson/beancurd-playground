@@ -104,7 +104,10 @@ Plan: 1 to add, 0 to change, 0 to destroy.
 ```
 
 Now prove `sensitive_only` is in the plan JSON but `sensitive_ephemeral`
-is not (same technique as Tasks 1 and 2):
+is not (same technique as
+[`../01-sensitive-variable-plan-vs-state`](../01-sensitive-variable-plan-vs-state)
+and
+[`../02-ephemeral-variable-basics`](../02-ephemeral-variable-basics)):
 
 ```bash
 terraform plan -input=false -var 'sensitive_ephemeral=SE-VALUE-999' -out=tfplan

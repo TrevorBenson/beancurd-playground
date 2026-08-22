@@ -20,6 +20,21 @@ put a real secret in a `default` value in committed code. This example
 requires you to supply `eph_token` at plan time via `-var`, exactly the
 way you'd supply a real one.
 
+Prove this yourself: temporarily add `default = "test-hardcoded-secret"` to
+`eph_token`, plan (`terraform plan -out=tfplan`), then:
+
+```bash
+mkdir -p /tmp/unz-eph-proof && unzip -o tfplan -d /tmp/unz-eph-proof
+grep -rl "test-hardcoded-secret" /tmp/unz-eph-proof
+```
+
+Expect it to show up only in the archived config source
+(`tfconfig/m-/main.tf`), never in the plan's actual data - proving the
+leak is about config archival, not the ephemeral mechanism failing.
+Revert the hardcoded default afterward and re-run `terraform plan -var
+'eph_token=...'` to confirm the example is back to its clean, committed
+state.
+
 ## Files
 
 - `main.tf` - `variable "eph_token"` (`ephemeral = true`, no default),
@@ -46,8 +61,10 @@ terraform show -json tfplan > plan.json
 grep -c "RUNTIME-ONLY-SECRET" plan.json || echo "0 - confirmed absent from plan JSON"
 ```
 
-Expect `0`. Compare this to Task 1's sibling example, where the same
-`grep -c` against a *sensitive* value's plan JSON returned `1` or more.
+Expect `0`. Compare this to
+[`../01-sensitive-variable-plan-vs-state`](../01-sensitive-variable-plan-vs-state),
+where the same `grep -c` against a *sensitive* value's plan JSON returned
+`1` or more.
 
 Now try to apply the saved plan **without** re-supplying the ephemeral
 value:

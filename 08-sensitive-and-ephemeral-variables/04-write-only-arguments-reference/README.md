@@ -1,6 +1,6 @@
 # Write-only arguments: the sanctioned path into real resources
 
-`03-ephemeral-context-limits` showed that an ephemeral value can't be
+[`03-ephemeral-context-limits`](../03-ephemeral-context-limits) showed that an ephemeral value can't be
 assigned to an ordinary resource argument. **Write-only arguments**
 (attributes whose name ends in `_wo`, a protocol feature added in
 Terraform/OpenTofu 1.11) are the sanctioned exception: a provider can mark
@@ -10,13 +10,20 @@ exists purely to receive a value once, not to be diffed against later.
 
 ## Why this example only inspects a schema, and never applies anything
 
-As of this writing, **no zero-dependency provider already used in this
-repo has adopted a write-only argument**: `hashicorp/local` (2.9.0),
-`hashicorp/random` (3.9.0), `hashicorp/tls` (4.3.0), and even
-`hashicorp/vault` (up to 5.11.0) have zero `_wo`-suffixed attributes across
-every resource they define - verified by the exact schema-scan technique
-below, not assumed. `hashicorp/aws` (~> 5.0) has adopted them, on exactly
-the fields you'd expect. This example downloads that provider purely to
+As of this writing, most zero-dependency providers already used in this
+repo have **not** adopted write-only arguments: `hashicorp/local` (2.9.0),
+`hashicorp/random` (3.9.0), and `hashicorp/tls` (4.3.0) had zero
+`_wo`-suffixed attributes across every resource they define, at the
+versions checked during research (verified with the same schema-scan
+technique below). `hashicorp/vault` (5.11.0, already used elsewhere in
+this tier) is the exception: it has actually adopted write-only arguments
+extensively - roughly 36 resources, including
+`vault_kv_secret_v2.data_json_wo`, the exact resource type this tier's own
+`06-vault-dynamic-secrets` capstone uses as an `ephemeral` resource. None
+of that, however, gives us a zero-dependency, no-credentials way to
+inspect write-only arguments in *this* example, so we reach for
+`hashicorp/aws` (~> 5.0) instead, which has adopted them on exactly the
+fields you'd expect. This example downloads that provider purely to
 read its schema - **no `provider "aws" {}` block, no credentials, no
 resources, no live AWS API calls, ever.**
 
@@ -62,8 +69,9 @@ aws_secretsmanager_secret_version ['has_secret_string_wo', 'secret_string_wo']
 aws_ssm_parameter ['has_value_wo', 'value_wo']
 ```
 
-Now confirm the negative claim for the providers already used elsewhere in
-this repo (adjust versions in the `python3` snippet's provider key if your
+Now check the same question for the other providers already used elsewhere
+in this repo - `hashicorp/vault` will report hits here, the other three
+won't (adjust versions in the `python3` snippet's provider key if your
 `.terraform.lock.hcl` pins differ):
 
 ```bash
@@ -83,9 +91,11 @@ for prov in ['registry.opentofu.org/hashicorp/local', 'registry.opentofu.org/has
 (This second check will report every provider as "not installed in this
 directory" unless you also add them to `required_providers` and re-run
 `terraform init` - that's expected; the point of this example is the
-`hashicorp/aws` schema, and the negative result for the others was
-independently verified during this repo's research and is stated here as
-a finding, not something this directory re-proves on every run.)
+`hashicorp/aws` schema. The results for `local`/`random`/`tls`/`vault`
+above were checked during this repo's research and are stated here as a
+finding, not something this directory re-proves on every run; see
+[`06-vault-dynamic-secrets`](../06-vault-dynamic-secrets) for `vault`'s
+`_wo` attribute in actual use.)
 
 ## The conceptual pattern (not runnable here - needs real AWS)
 
