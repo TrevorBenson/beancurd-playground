@@ -7,6 +7,12 @@ which only hides it from CLI display while leaving the real value in both
 files. Uses the built-in `terraform_data` resource - no external provider
 or real infrastructure involved.
 
+The commands below use `-var 'eph_token=...'` with a fake placeholder
+value for a short, copy-pasteable walkthrough. If you adapt this to a
+*real* secret, don't use `-var` on the command line - see [the tier
+README's note on this](../README.md#a-note-on--var-in-these-walkthroughs)
+for why (shell history, process list exposure) and what to use instead.
+
 ## Why `eph_token` has no `default`
 
 A hardcoded `default = "some-real-secret"` in a *committed* `.tf` file

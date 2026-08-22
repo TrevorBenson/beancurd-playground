@@ -1,10 +1,11 @@
 # Where ephemeral values can (and can't) be used
 
-A complete tour of the contexts an `ephemeral` value is accepted in, and
-the ones it's rejected from - with the exact, real error text for every
-rejected case, captured from actual `terraform validate` runs rather than
-guessed. Requires real network access to `jsonplaceholder.typicode.com`
-and Terraform/OpenTofu >= 1.10.
+A tour of the contexts this tier demonstrates an `ephemeral` value being
+accepted in, and the ones it's rejected from, with the exact, real error
+text for every rejected case, captured from actual `terraform validate`
+runs rather than guessed. See "Allowed contexts" below for what this list
+does and doesn't claim to cover. Requires real network access to
+`jsonplaceholder.typicode.com` and Terraform/OpenTofu >= 1.10.
 
 ## Allowed contexts
 

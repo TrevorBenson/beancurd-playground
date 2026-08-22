@@ -30,7 +30,8 @@ locals {
 }
 
 # check blocks are one of the sanctioned contexts an ephemeral value CAN
-# be used in - see 03-ephemeral-context-limits for the full allow-list.
+# be used in - see 03-ephemeral-context-limits for the contexts this tier
+# demonstrates (not an exhaustive catalog).
 check "eph_check" {
   assert {
     condition     = length(local.eph_local) > 0

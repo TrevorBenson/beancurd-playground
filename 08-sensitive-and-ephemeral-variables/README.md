@@ -37,3 +37,18 @@ documents a write-only-argument protocol feature that shipped in 1.11).
 `03`, `05`, and `06` require real network access; `06` additionally
 requires a locally-running Vault dev server (see its own README) and
 `04` downloads a large provider binary purely to read its schema.
+
+## A note on `-var` in these walkthroughs
+
+Every example uses `-var 'name=value'` on the command line to keep the
+walkthrough commands short and copy-pasteable, and that's fine with the
+fake placeholder values shown - but `-var` puts the value in your shell
+history and briefly makes it visible to other local users via the process
+list (e.g. `ps aux`) while the command runs. If you adapt any of these
+examples to a *real* secret, prefer a `TF_VAR_<name>` environment variable
+(e.g. `export TF_VAR_eph_token=...` before running `terraform plan`, or
+`TF_VAR_eph_token=... terraform plan` for a single command) or an
+interactive prompt instead - both keep the value out of shell history and
+the visible command line. This applies equally to ordinary `sensitive`
+variables and to `ephemeral` ones; `ephemeral` only protects the value
+once it reaches Terraform/OpenTofu, not on the way in.
