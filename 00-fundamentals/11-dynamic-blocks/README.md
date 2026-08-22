@@ -10,12 +10,12 @@ provider's schema.
 ## Why `hashicorp/tls` instead of a provider-free resource
 
 No provider-free or built-in resource in this repo's toolkit
-(`terraform_data`) has a repeatable nested block to generate - the concept
+(`terraform_data`) has a nested block to generate dynamically - the concept
 requires a real resource schema that defines one. `hashicorp/tls` was
 chosen because it computes everything locally (a private key and a
 self-signed certificate, both pure cryptographic computation) with **no
 network calls and no real cloud infrastructure**, while still having a
-genuine repeatable nested block (`tls_self_signed_cert`'s `subject`) to
+schema-defined nested block (`tls_self_signed_cert`'s `subject`) to
 demonstrate the mechanism honestly.
 
 Note that unlike this repo's other "no external dependencies" examples,
@@ -28,9 +28,17 @@ network calls at plan/apply time.
 `dynamic "subject"` iterates `var.include_subject ? [var.subject_common_name] : []`
 - a list with either one element or zero. This is the classic "optional
 nested block" pattern: when the list is empty, zero `subject` blocks are
-emitted; when it has one element, exactly one is. The same pattern
-generalizes to any list/map with more than one element, emitting one block
-per entry.
+emitted; when it has one element, exactly one is.
+
+Note that `tls_self_signed_cert` specifically only ever accepts zero or one
+`subject` block - the provider rejects a plan with two (`Attribute subject
+list must contain at least 0 elements and at most 1 elements, got: 2`), so
+this example only demonstrates the "0 or 1" case. The general "N elements,
+N blocks" pattern this technique is usually used for requires a resource
+whose schema actually allows more than one instance of the nested block
+(e.g. an `ingress`/`egress` block on a cloud security group) - `subject`
+here is a convenient, real, local-only nested block to demonstrate the
+`dynamic` mechanics with, not an example of that fuller generality.
 
 A **`dynamic` block cannot be used for `provisioner`, `connection`, or
 `lifecycle` blocks** - only for a resource, data source, or provider's own

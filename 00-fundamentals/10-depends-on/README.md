@@ -35,8 +35,8 @@ terraform init
 terraform apply -auto-approve
 ```
 
-Expect `first` to always report "Creating..."/"Creation complete" before
-`second`, on every run:
+On this first apply, expect `first` to report "Creating..."/"Creation
+complete" before `second`:
 
 ```
 terraform_data.first: Creating...
@@ -44,6 +44,11 @@ terraform_data.first: Creation complete after 0s [id=...]
 terraform_data.second: Creating...
 terraform_data.second: Creation complete after 0s [id=...]
 ```
+
+(Re-running `terraform apply` afterward is a no-op - `first` and `second`
+already exist and match configuration, so neither creation sequence
+prints. The ordering guarantee is only observable when the resources are
+actually being created, or recreated after a forced replacement.)
 
 Clean up:
 
