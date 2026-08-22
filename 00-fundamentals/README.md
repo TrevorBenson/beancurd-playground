@@ -20,3 +20,14 @@ infrastructure required.
   just-computed result.
 - [`06-for-each-multiple-resources`](06-for-each-multiple-resources) - the
   `for_each` meta-argument creating one resource instance per map entry.
+- [`07-count-and-splat`](07-count-and-splat) - the `count` meta-argument and
+  `[*]` splat expressions, contrasted with `for_each`.
+- [`08-sensitive-values`](08-sensitive-values) - `sensitive = true` on
+  variables and outputs, and how the marking propagates.
+- [`09-string-and-collection-functions`](09-string-and-collection-functions) -
+  `join()`, `merge()`, `lookup()`, a for-expression, and `templatefile()`.
+- [`10-depends-on`](10-depends-on) - forcing an explicit creation order
+  between two resources with no attribute reference between them.
+- [`11-dynamic-blocks`](11-dynamic-blocks) - generating a variable number of
+  nested configuration blocks (using `hashicorp/tls` for a resource that
+  actually has one).
