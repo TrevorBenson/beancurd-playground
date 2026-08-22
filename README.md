@@ -11,7 +11,7 @@ provider-free language features or the built-in `terraform_data` resource.
 
 Tested with OpenTofu v1.11.5 (the `terraform` binary in this environment is
 an OpenTofu build); the language features used are standard Terraform
-1.5-1.10+ features and should behave identically on HashiCorp Terraform of
+1.5-1.11+ features and should behave identically on HashiCorp Terraform of
 matching or later versions.
 
 ## Learning path
@@ -83,6 +83,17 @@ tiers build on earlier tiers.
 |-----------|---------|
 | [`01-terraform-test-framework`](07-testing/01-terraform-test-framework) | `.tftest.hcl` `run` blocks and `expect_failures`, distinct from plan/apply-time checks |
 
+### Tier 8 - [`08-sensitive-and-ephemeral-variables`](08-sensitive-and-ephemeral-variables) (requires Terraform/OpenTofu >= 1.10 for most examples, >= 1.5 for `01-sensitive-variable-plan-vs-state` alone, >= 1.11 for `04-write-only-arguments-reference` alone; several examples need network access or a local Vault dev server)
+
+| Directory | Concept |
+|-----------|---------|
+| [`01-sensitive-variable-plan-vs-state`](08-sensitive-and-ephemeral-variables/01-sensitive-variable-plan-vs-state) | `sensitive = true` only redacts CLI display - the real value is plaintext in plan/state JSON |
+| [`02-ephemeral-variable-basics`](08-sensitive-and-ephemeral-variables/02-ephemeral-variable-basics) | `ephemeral = true` genuinely omits the value from plan and state, verified via `terraform show -json` |
+| [`03-ephemeral-context-limits`](08-sensitive-and-ephemeral-variables/03-ephemeral-context-limits) | Where ephemeral values are accepted vs. rejected, with exact captured error text |
+| [`04-write-only-arguments-reference`](08-sensitive-and-ephemeral-variables/04-write-only-arguments-reference) | Schema-only reference to write-only (`_wo`) resource arguments, using `hashicorp/aws` (`hashicorp/vault` has adopted them too, but only `aws` lets this example stay credential-free) |
+| [`05-combining-plain-sensitive-and-sensitive-ephemeral`](08-sensitive-and-ephemeral-variables/05-combining-plain-sensitive-and-sensitive-ephemeral) | A plain, sensitive, and sensitive+ephemeral variable through every allowed context |
+| [`06-vault-dynamic-secrets`](08-sensitive-and-ephemeral-variables/06-vault-dynamic-secrets) | A real local Vault dev server; fetches a secret via an ephemeral resource, and documents Vault's Kerberos/OIDC/etc. auth patterns |
+
 ## Conventions
 
 - Every example has a `README.md` stating exactly what to run
@@ -92,3 +103,6 @@ tiers build on earlier tiers.
 - Examples needing real network access say so explicitly in their README
   and use stable, well-known public test endpoints
   (`jsonplaceholder.typicode.com`, `postman-echo.com`).
+  [`08-sensitive-and-ephemeral-variables/06-vault-dynamic-secrets`](08-sensitive-and-ephemeral-variables/06-vault-dynamic-secrets)
+  additionally requires a locally-running Vault dev server (see its own
+  README).

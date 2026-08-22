@@ -4,8 +4,15 @@
 *.tfstate
 *.tfstate.*
 *.tfplan
+tfplan
 crash.log
 crash.*.log
+
+# Reader-generated scratch files from README walkthroughs (plan/state/schema
+# dumps can contain real, if fake/test, secret material)
+plan.json
+state.json
+schema.json
 
 # Scratch/testing directory (not part of committed examples)
 .tmp/
