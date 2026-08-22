@@ -1,6 +1,6 @@
 # Ephemeral resource: invalid response (401/404)
 
-Same idea as [`valid-response/`](../valid-response), but pointed at
+Same idea as [`01-valid-response/`](../01-valid-response), but pointed at
 `https://postman-echo.com/status/<code>` - a stable public test endpoint
 that returns whatever HTTP status code you ask for. This demonstrates what
 happens when `ephemeral "restful_resource"`'s "open" call gets a non-2xx

@@ -35,6 +35,6 @@ todo_status_code = 200
 todo_title       = "delectus aut autem"
 ```
 
-See [`06-http-precondition-validation`](../06-http-precondition-validation)
+See [`02-precondition-validation`](../02-precondition-validation)
 for a variant that adds variable validation against this same response via a
 `lifecycle` precondition.

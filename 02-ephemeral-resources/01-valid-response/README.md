@@ -1,7 +1,7 @@
 # Ephemeral resource: valid response, accessing a JSON key
 
 Fetches `https://jsonplaceholder.typicode.com/todos/1` (the same
-known-fixed endpoint used in [`04-data-http-json-key`](../../04-data-http-json-key),
+known-fixed endpoint used in [`01-http-data-source/01-fetch-and-decode-json`](../../01-http-data-source/01-fetch-and-decode-json),
 but via the `magodo/restful` provider's `ephemeral "restful_resource"`
 instead of `data "http"`) and accesses the `title` and `completed` keys from
 its JSON response.

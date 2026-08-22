@@ -8,10 +8,10 @@ terraform {
   }
 }
 
-# Extends 04-data-http-json-key: same fixed-response endpoint, but adds a
+# Extends 01-fetch-and-decode-json: same fixed-response endpoint, but adds a
 # variable that must match a value found in the *actual* HTTP response.
-# A lifecycle precondition on the data source enforces that, using `self`
-# to refer back to the data source's own attributes.
+# A lifecycle precondition enforces that (see the comment on the output
+# below for why it can't live on the data source itself).
 
 variable "expected_todo_id" {
   description = "The 'id' this config expects the fetched todo to have."

@@ -4,7 +4,7 @@ Demonstrates Terraform/OpenTofu's `check` block: an assertion that runs during
 plan (and apply) but only ever produces a **warning**, never blocks the run.
 This is the idiomatic way to implement a "soft" guardrail, as opposed to a
 `lifecycle { precondition {} }`, which hard-fails the plan (see
-[`03-locals-comparison-precondition`](../03-locals-comparison-precondition)).
+[`03-locals-precondition`](../03-locals-precondition)).
 
 No provider or real infrastructure is used - this is a pure language-feature
 example.

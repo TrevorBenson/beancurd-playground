@@ -11,10 +11,9 @@ terraform {
 # jsonplaceholder.typicode.com is a free, stable fake-REST-API used widely
 # in examples/tutorials. /todos/1 always returns the same fixed JSON body:
 #   {"userId": 1, "id": 1, "title": "delectus aut autem", "completed": false}
-# This is the one example in this repo that requires real network access -
-# per the repo convention, external dependencies are used here because the
-# concept (parsing a real HTTP JSON response) can't be demonstrated with a
-# mock.
+# This example requires real network access - per the repo convention,
+# external dependencies are used here because the concept (parsing a real
+# HTTP JSON response) can't be demonstrated with a mock.
 
 data "http" "todo" {
   url = "https://jsonplaceholder.typicode.com/todos/1"

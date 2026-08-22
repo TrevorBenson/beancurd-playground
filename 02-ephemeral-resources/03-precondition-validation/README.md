@@ -1,6 +1,6 @@
 # Variable validation against an ephemeral response via a lifecycle precondition
 
-Extends [`05-restful-ephemeral-resource/valid-response`](../05-restful-ephemeral-resource/valid-response):
+Extends [`01-valid-response`](../01-valid-response):
 fetches the same fixed JSON body via `ephemeral "restful_resource"`, then
 uses a `lifecycle { precondition {} }` to validate a variable against a key
 in the *actual* ephemeral response, invalidating the plan when it doesn't
@@ -14,12 +14,12 @@ Requires Terraform/OpenTofu >= 1.10 and real network access to
 Two of the constraints from the earlier examples combine here:
 
 - Root modules can't declare `ephemeral = true` outputs (see
-  [`05-restful-ephemeral-resource/valid-response`](../05-restful-ephemeral-resource/valid-response)),
+  [`01-valid-response`](../01-valid-response)),
   so the ephemeral resource lives in
   [`modules/todo-fetcher`](modules/todo-fetcher).
 - `self` (used to reference a block's own result) only works in
   `postcondition`, not `precondition` (see
-  [`06-http-precondition-validation`](../06-http-precondition-validation)),
+  [`01-http-data-source/02-precondition-validation`](../../01-http-data-source/02-precondition-validation)),
   so the precondition is attached to the module's `output "title"` block,
   referencing `ephemeral.restful_resource.item.output.completed` directly
   rather than via `self`.
