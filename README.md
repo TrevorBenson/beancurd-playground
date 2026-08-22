@@ -11,7 +11,7 @@ provider-free language features or the built-in `terraform_data` resource.
 
 Tested with OpenTofu v1.11.5 (the `terraform` binary in this environment is
 an OpenTofu build); the language features used are standard Terraform
-1.5-1.10+ features and should behave identically on HashiCorp Terraform of
+1.5-1.11+ features and should behave identically on HashiCorp Terraform of
 matching or later versions.
 
 ## Learning path
@@ -83,7 +83,7 @@ tiers build on earlier tiers.
 |-----------|---------|
 | [`01-terraform-test-framework`](07-testing/01-terraform-test-framework) | `.tftest.hcl` `run` blocks and `expect_failures`, distinct from plan/apply-time checks |
 
-### Tier 8 - [`08-sensitive-and-ephemeral-variables`](08-sensitive-and-ephemeral-variables) (requires Terraform/OpenTofu >= 1.10 for most examples, >= 1.5 for `01-sensitive-variable-plan-vs-state` alone; several examples need network access or a local Vault dev server)
+### Tier 8 - [`08-sensitive-and-ephemeral-variables`](08-sensitive-and-ephemeral-variables) (requires Terraform/OpenTofu >= 1.10 for most examples, >= 1.5 for `01-sensitive-variable-plan-vs-state` alone, >= 1.11 for `04-write-only-arguments-reference` alone; several examples need network access or a local Vault dev server)
 
 | Directory | Concept |
 |-----------|---------|

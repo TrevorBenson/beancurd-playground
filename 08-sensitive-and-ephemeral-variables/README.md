@@ -31,7 +31,8 @@ case - fetching a secret from HashiCorp Vault that never touches state.
 
 Requires Terraform/OpenTofu >= 1.10 throughout (>= 1.5 for
 `01-sensitive-variable-plan-vs-state` alone, which predates ephemeral
-variables). `03`, `05`, and `06` require real network access;
-`06` additionally requires a locally-running Vault dev server (see its
-own README) and `04` downloads a large provider binary purely to read its
-schema.
+variables; >= 1.11 for `04-write-only-arguments-reference` alone, which
+documents a write-only-argument protocol feature that shipped in 1.11).
+`03`, `05`, and `06` require real network access; `06` additionally
+requires a locally-running Vault dev server (see its own README) and
+`04` downloads a large provider binary purely to read its schema.
