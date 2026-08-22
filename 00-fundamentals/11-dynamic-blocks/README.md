@@ -18,6 +18,11 @@ network calls and no real cloud infrastructure**, while still having a
 genuine repeatable nested block (`tls_self_signed_cert`'s `subject`) to
 demonstrate the mechanism honestly.
 
+Note that unlike this repo's other "no external dependencies" examples,
+`terraform init` here still needs registry access to download the
+`hashicorp/tls` provider itself, even though the provider makes no
+network calls at plan/apply time.
+
 ## What this demonstrates
 
 `dynamic "subject"` iterates `var.include_subject ? [var.subject_common_name] : []`
@@ -71,9 +76,13 @@ Outputs:
 cert_has_subject = false
 ```
 
-(The certificate is recreated because `validity_period_hours`/`allowed_uses`
-depend on the private key relationship, not because of the dynamic block
-itself - only `tls_self_signed_cert` changes, `tls_private_key` doesn't.)
+(The certificate is recreated *because* of the dynamic block: emitting
+zero `subject` blocks removes the `subject` block entirely from
+`tls_self_signed_cert`'s configuration, and `subject` is a force-new
+argument in that resource's schema. The plan diff shows this explicitly
+with a `- subject { # forces replacement` marker on the removed block.
+`tls_private_key` is untouched throughout - only `tls_self_signed_cert`
+changes.)
 
 Clean up:
 

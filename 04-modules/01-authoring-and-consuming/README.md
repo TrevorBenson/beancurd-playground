@@ -9,6 +9,12 @@ a `for_each` resource (see
 Uses the built-in `terraform_data` resource inside the module - no external
 provider or real infrastructure involved.
 
+(A different example, [`02-ephemeral-resources/01-valid-response`](../../02-ephemeral-resources/01-valid-response),
+also has a child module, but for a different reason - working around the
+restriction that root modules can't declare ephemeral outputs. This
+example uses a child module to demonstrate module authoring/composition
+as a first-class concept in its own right.)
+
 ## Files
 
 - `modules/widget/main.tf` - a self-contained module: `variable "name"`,

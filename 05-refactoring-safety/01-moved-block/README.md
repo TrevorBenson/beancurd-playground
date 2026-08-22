@@ -41,6 +41,10 @@ terraform apply -auto-approve   # creates terraform_data.widget_new in state
 cp /tmp/main.tf.bak main.tf     # restore this example's real main.tf (the renamed version + moved block)
 ```
 
+(If you abort partway through and `main.tf` ends up in an unexpected
+state, `git checkout main.tf` restores the shipped version since it's
+git-tracked.)
+
 Now plan against the restored (renamed) configuration:
 
 ```bash

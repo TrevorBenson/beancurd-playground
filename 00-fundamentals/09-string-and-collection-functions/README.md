@@ -2,7 +2,7 @@
 
 A tour of everyday HCL functions beyond `jsondecode()`/`contains()`/`try()`/
 `can()` (already covered in
-[`04-data-http-json-key`](../../01-http-data-source/01-fetch-and-decode-json)
+[`01-fetch-and-decode-json`](../../01-http-data-source/01-fetch-and-decode-json)
 and [`02-key-exists-in-var-object`](../02-key-exists-in-var-object)):
 `join()`, a for-expression, `merge()`, `lookup()`, and `templatefile()`. No
 provider or real infrastructure is used.

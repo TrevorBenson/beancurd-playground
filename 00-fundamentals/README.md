@@ -3,7 +3,10 @@
 Core Terraform/OpenTofu language building blocks used throughout the rest of
 this repo - `check` blocks, variable validation, lifecycle pre/postconditions,
 and `for_each` - demonstrated in isolation with no provider or real
-infrastructure required.
+infrastructure required, with one exception: `11-dynamic-blocks` uses
+`hashicorp/tls` for entirely local computation (no network calls at
+plan/apply time), but still requires `terraform init` to have registry
+access to download the provider.
 
 - [`01-check-block-warning`](01-check-block-warning) - a `check` block
   assertion that only ever warns, never blocks the plan.

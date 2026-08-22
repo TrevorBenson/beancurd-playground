@@ -5,7 +5,8 @@ combining into real plans. Each directory is a standalone proof of concept:
 its own `main.tf`, its own `README.md` explaining exactly how to exercise
 it, and no dependency on any other example. Providers with external/network
 dependencies are only used where the concept genuinely requires them
-(fetching and parsing a real HTTP response); everything else uses
+(fetching and parsing a real HTTP response, or needing a resource schema
+with a genuinely repeatable nested block); everything else uses
 provider-free language features or the built-in `terraform_data` resource.
 
 Tested with OpenTofu v1.11.5 (the `terraform` binary in this environment is
@@ -19,7 +20,7 @@ Examples are grouped into tiers, roughly ordered from beginner to
 intermediate. Within a tier, later examples build on earlier ones; later
 tiers build on earlier tiers.
 
-### Tier 0 - [`00-fundamentals`](00-fundamentals) (no external dependencies)
+### Tier 0 - [`00-fundamentals`](00-fundamentals) (no external dependencies, except 11-dynamic-blocks, which downloads a local-only provider)
 
 | Directory | Concept |
 |-----------|---------|

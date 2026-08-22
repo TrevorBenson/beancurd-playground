@@ -18,6 +18,12 @@ your own captured id** for the placeholder in `main.tf` - a real id from
 a real provider (an AWS instance ID, a GCP resource URL, etc.) is exactly
 what you'd put there in a non-simulated case.
 
+## Files
+
+- `main.tf` - `resource "terraform_data" "example"` plus an `import`
+  block bringing `terraform_data.example` under management using a
+  placeholder id (`REPLACE_WITH_REAL_ID_FROM_README_STEPS`).
+
 ## How to test
 
 ```bash
@@ -34,7 +40,7 @@ resource "terraform_data" "example" {
 }
 EOF
 terraform apply -auto-approve
-REAL_ID=$(terraform state show terraform_data.example | grep -oP '(?<=id\s{5}= ")[^"]+')
+REAL_ID=$(terraform show -json | python3 -c "import json,sys; print(json.load(sys.stdin)['values']['root_module']['resources'][0]['values']['id'])")
 echo "captured id: $REAL_ID"
 terraform state rm terraform_data.example   # forget it, simulating "not yet under management"
 cp main.tf.bak main.tf                      # restore this example's real main.tf (with the import block)
@@ -70,8 +76,16 @@ time. A real provider resource with actual persisted attributes would
 typically show `0 to change` once its full state is read back during
 import.)
 
-Clean up:
+Nothing was actually created or imported for real in this walkthrough -
+the earlier `terraform apply` was for the temporary simulated
+"pre-existing" resource (already destroyed via `state rm`, not applied
+again), and the final step above only *plans* the import, it doesn't
+apply it. There's nothing in state to `terraform destroy`.
+
+Clean up your checkout so `main.tf` matches what's committed (placeholder
+id and all) and no `.bak` file is left behind:
 
 ```bash
-terraform destroy -auto-approve
+git checkout main.tf
+rm -f main.tf.bak
 ```
