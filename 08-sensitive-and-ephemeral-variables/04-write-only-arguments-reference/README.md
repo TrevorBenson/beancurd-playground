@@ -47,7 +47,11 @@ terraform providers schema -json > schema.json
 python3 -c "
 import json
 d = json.load(open('schema.json'))
-p = d['provider_schemas']['registry.opentofu.org/hashicorp/aws']
+# Provider addresses are keyed by registry hostname, which differs by
+# tool - OpenTofu uses 'registry.opentofu.org/...', HashiCorp Terraform
+# uses 'registry.terraform.io/...'. Match on the 'hashicorp/aws' suffix
+# instead of hardcoding a hostname, so this works with either tool.
+p = next(v for k, v in d['provider_schemas'].items() if k.endswith('hashicorp/aws'))
 for name, sch in sorted(p.get('resource_schemas', {}).items()):
     attrs = sch['block'].get('attributes', {})
     wo = [a for a in attrs if a.endswith('_wo')]
@@ -78,13 +82,13 @@ won't (adjust versions in the `python3` snippet's provider key if your
 python3 -c "
 import json
 d = json.load(open('schema.json'))
-for prov in ['registry.opentofu.org/hashicorp/local', 'registry.opentofu.org/hashicorp/random', 'registry.opentofu.org/hashicorp/tls', 'registry.opentofu.org/hashicorp/vault']:
-    if prov not in d['provider_schemas']:
-        print(prov, '- not installed in this directory, skip')
+for suffix in ['hashicorp/local', 'hashicorp/random', 'hashicorp/tls', 'hashicorp/vault']:
+    match = next((v for k, v in d['provider_schemas'].items() if k.endswith(suffix)), None)
+    if match is None:
+        print(suffix, '- not installed in this directory, skip')
         continue
-    p = d['provider_schemas'][prov]
-    hits = [n for n, s in p.get('resource_schemas', {}).items() if any(a.endswith('_wo') for a in s['block'].get('attributes', {}))]
-    print(prov, '->', hits or 'no write-only attributes')
+    hits = [n for n, s in match.get('resource_schemas', {}).items() if any(a.endswith('_wo') for a in s['block'].get('attributes', {}))]
+    print(suffix, '->', hits or 'no write-only attributes')
 "
 ```
 

@@ -97,7 +97,7 @@ vault_spiffe_secret_backend_mintjwt      vault_terraform_token
 vault_token                              vault_userpass_auth_login
 ```
 
-(Verify this roster yourself: `terraform providers schema -json | python3 -c "import json,sys; d=json.load(sys.stdin); print(sorted(d['provider_schemas']['registry.opentofu.org/hashicorp/vault']['ephemeral_resource_schemas'].keys()))"` after declaring the provider - no live Vault server needed just to read the schema.)
+(Verify this roster yourself: `terraform providers schema -json | python3 -c "import json,sys; d=json.load(sys.stdin); p=next(v for k,v in d['provider_schemas'].items() if k.endswith('hashicorp/vault')); print(sorted(p['ephemeral_resource_schemas'].keys()))"` after declaring the provider - no live Vault server needed just to read the schema. Matching on the `hashicorp/vault` suffix rather than a hardcoded registry hostname keeps this working whether you're running OpenTofu, which keys schemas under `registry.opentofu.org/...`, or HashiCorp Terraform, which uses `registry.terraform.io/...`.)
 
 The `provider "vault" {}` block itself also has dedicated nested
 authentication blocks - any of which can accept an ephemeral variable for
