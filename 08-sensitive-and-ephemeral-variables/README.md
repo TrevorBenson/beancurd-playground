@@ -13,9 +13,10 @@ case - fetching a secret from HashiCorp Vault that never touches state.
 - [`02-ephemeral-variable-basics/`](02-ephemeral-variable-basics) -
   `ephemeral = true` is a real omission from both files, verified absent
   via `terraform show -json`.
-- [`03-ephemeral-context-limits/`](03-ephemeral-context-limits) - the full
-  allow-list of contexts an ephemeral value can be used in, and the exact
-  error text for the contexts it's rejected from.
+- [`03-ephemeral-context-limits/`](03-ephemeral-context-limits) - the
+  contexts an ephemeral value is accepted in and rejected from that this
+  tier demonstrates (not an exhaustive catalog), with the exact error
+  text for every rejected case.
 - [`04-write-only-arguments-reference/`](04-write-only-arguments-reference) -
   schema-only reference (no live AWS): the sanctioned way a real managed
   resource can accept an ephemeral value.
